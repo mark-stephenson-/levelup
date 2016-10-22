@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user_id: 
+  outbound_msg_id: 1
+  motivating_msg_id: 1
+  description: MyString
+  initial_effort: 1
+  subsequent_effort: 1
+
+two:
+  user_id: 
+  outbound_msg_id: 1
+  motivating_msg_id: 1
+  description: MyString
+  initial_effort: 1
+  subsequent_effort: 1
