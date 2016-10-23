@@ -4,8 +4,11 @@ class UsersController < ApplicationController
   # GET /users
   # GET /users.json
   def index
-    @users = User.all
-
+    @users = if params[:fb_id]
+               User.find_by(fb_id: params[:fb_id])
+             else
+               User.all
+             end
     render json: @users
   end
 

@@ -4,8 +4,12 @@ class EventsController < ApplicationController
   # GET /events
   # GET /events.json
   def index
-    @events = Event.all
-
+    @events =
+      if params[:fb_id]
+        Event.joins(:user).where(users: { fb_id: params[:fb_id] })
+      else
+        Event.all
+      end
     render json: @events
   end
 
@@ -49,11 +53,15 @@ class EventsController < ApplicationController
 
   private
 
-    def set_event
-      @event = Event.find(params[:id])
-    end
+  def set_event
+    @event = Event.find(params[:id])
+  end
 
-    def event_params
-      params.require(:event).permit(:user_id, :outbound_msg_id, :motivating_msg_id, :description, :initial_effort, :subsequent_effort)
-    end
+  def event_params
+    params.require(:event).permit(
+      :user_id, :outbound_msg_id, :motivating_msg_id,
+      :description, :initial_effort, :subsequent_effort,
+      :fb_id
+    )
+  end
 end

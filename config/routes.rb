@@ -3,6 +3,9 @@ Rails.application.routes.draw do
   resources :schedules, except: [:new, :edit]
   resources :users, except: [:new, :edit]
   resources :api_users, except: [:new, :edit]
+  # Endpoint to allow the issue of tokens
+  get :token, controller: 'application'
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
