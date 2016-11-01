@@ -4,8 +4,11 @@ class SchedulesController < ApplicationController
   # GET /schedules
   # GET /schedules.json
   def index
-    @schedules = Schedule.all
-
+    @schedules =  if params[:fb_id]
+                    Schedule.joins(:user).where(users: { fb_id: params[:fb_id] })
+                  else
+                    Schedule.all
+                  end
     render json: @schedules
   end
 
@@ -33,7 +36,7 @@ class SchedulesController < ApplicationController
     @schedule = Schedule.find(params[:id])
 
     if @schedule.update(schedule_params)
-      head :no_content
+      render json: @schedule, status: :ok
     else
       render json: @schedule.errors, status: :unprocessable_entity
     end

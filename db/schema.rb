@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161022193957) do
+ActiveRecord::Schema.define(version: 20161101191851) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -46,7 +46,7 @@ ActiveRecord::Schema.define(version: 20161022193957) do
     t.boolean  "friday",      default: true
     t.boolean  "saturday",    default: false
     t.boolean  "sunday",      default: false
-    t.boolean  "schedule_on", default: true
+    t.boolean  "schedule_on", default: false
     t.datetime "created_at",                  null: false
     t.datetime "updated_at",                  null: false
   end

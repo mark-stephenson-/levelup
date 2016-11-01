@@ -21,7 +21,13 @@ class UsersController < ApplicationController
   # POST /users
   # POST /users.json
   def create
-    @user = User.new(user_params)
+    @user = User.find_or_initialize_by(fb_id: params[:fb_id]) do |user|
+      user.first_name = params['user']['first_name']  ||  'Unknown'
+      user.last_name  = params['user']['last_name']   ||  'Unknown'
+      user.locale     = params['user']['locale']      ||  'Unknown'
+      user.timezone   = params['user']['timezone']    ||  0
+      user.gender     = params['user']['gender']      ||  'Unknown'
+    end
 
     if @user.save
       render json: @user, status: :created, location: @user
@@ -52,11 +58,14 @@ class UsersController < ApplicationController
 
   private
 
-    def set_user
-      @user = User.find(params[:id])
-    end
+  def set_user
+    @user = User.find(params[:id])
+  end
 
-    def user_params
-      params.require(:user).permit(:fb_id, :first_name, :last_name, :locale, :timezone, :gender)
-    end
+  def user_params
+    params.require(:user).permit(
+      :fb_id, :first_name, :last_name,
+      :locale, :timezone, :gender
+    )
+  end
 end

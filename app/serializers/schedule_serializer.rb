@@ -1,3 +1,3 @@
 class ScheduleSerializer < ActiveModel::Serializer
-  attributes :id
+  attributes :id, :schedule_on
 end
