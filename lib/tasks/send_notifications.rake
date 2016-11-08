@@ -1,21 +1,20 @@
 namespace :notifications do
   desc 'manage daily notification'
   task send: :environment do
-    schedules = Schedule.where('next_send < ?', DateTime.now)
+    schedules = Schedule.where('next_send < ?', DateTime.now).where(schedule_on: true)
 
     schedules.each do |schedule|
+      # Get random message
+      msgstock = MessageStock.order('RANDOM()').first
       # Send the update
       msg = FbPostMessage.new
-      code = msg.process!(
+      msg.process!(
         recipient: schedule.user.fb_id,
-        msg: 'message from rake'
+        msg: msgstock.text
       )
-      if code == 200
-        # Update next send time
-        schedule.update_attributes(
-          next_send: DateUtils.new.rand_time
-          )
-      end
+      schedule.update_attributes(
+        next_send: DateUtils.new.rand_time
+      )
     end
   end
 end

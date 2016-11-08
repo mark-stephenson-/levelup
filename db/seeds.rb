@@ -9,3 +9,12 @@ ApiUser.create(
   email: 'mark@m12n.co.uk',
   password: ENV['MASTER_PASSWORD']
 )
+MessageStock.create(
+  [
+    { message_type: 1, text: 'Message 1' },
+    { message_type: 1, text: 'Message 2' },
+    { message_type: 1, text: 'Message 3' },
+    { message_type: 1, text: 'Message 4' },
+    { message_type: 1, text: 'Message 5' }
+  ]
+)
