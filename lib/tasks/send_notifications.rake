@@ -5,11 +5,17 @@ namespace :notifications do
 
     schedules.each do |schedule|
       # Send the update
-
-      # Update next send time
-      schedule.update_attributes(
-        next_send: DateUtils.new.rand_time
+      msg = FbPostMessage.new
+      code = msg.process!(
+        recipient: schedule.user.fb_id,
+        msg: 'message from rake'
       )
+      if code == 200
+        # Update next send time
+        schedule.update_attributes(
+          next_send: DateUtils.new.rand_time
+          )
+      end
     end
   end
 end

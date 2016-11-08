@@ -26,5 +26,8 @@ module Levelup
     config.autoload_paths += %W(
       #{config.root}/app/support
     )
+    config.autoload_paths += %W(
+      #{config.root}/app/services
+    )
   end
 end
