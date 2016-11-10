@@ -18,8 +18,8 @@ class DateUtils
 
     rand_dt = DateTime.now.beginning_of_day
 
-    hour      = rand(hour_low..16)
-    min       = rand(min_low..59)
+    hour      = rand(hour_low..16) || hour_low
+    min       = rand(min_low..59) || min_low
 
     rand_dt += 1.day unless now && now_dt.hour < 17
     rand_dt += hour.hours
