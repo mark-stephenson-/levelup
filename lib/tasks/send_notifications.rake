@@ -6,12 +6,17 @@ namespace :notifications do
     schedules.each do |schedule|
       # Get random message
       msgstock = MessageStock.order('RANDOM()').first
+      puts msgstock.text.green
       # Send the update
       msg = FbPostMessage.new
-      msg.process!(
+      puts msg
+      puts "recipient: #{schedule.user.fb_id}"
+      puts "msg: #{msgstock.text}"
+      processed = msg.process!(
         recipient: schedule.user.fb_id,
         msg: msgstock.text
       )
+      puts processed
       schedule.update_attributes(
         next_send: DateUtils.new.rand_time
       )
