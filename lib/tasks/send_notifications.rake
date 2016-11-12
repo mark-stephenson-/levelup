@@ -9,7 +9,7 @@ namespace :notifications do
 
       # Send the update
       msg = FbPostMessage.new
-      msg.process!(
+      puts msg.process!(
         recipient: schedule.user.fb_id,
         msg: msgstock.text
       )
