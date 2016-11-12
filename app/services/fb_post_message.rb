@@ -5,6 +5,7 @@ class FbPostMessage
 
   def process!(recipient: nil, msg: nil)
     rq    = build_request(recipient, msg)
+    puts rq
     http  = http_cnx.request(rq)
     http.code
   end
