@@ -6,7 +6,7 @@ namespace :notifications do
     schedules.each do |schedule|
       # Get random message
       msgstock = MessageStock.order('RANDOM()').first
-      puts msgstock.text.green
+
       # Send the update
       msg = FbPostMessage.new
       msg.process!(
