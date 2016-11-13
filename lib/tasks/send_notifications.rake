@@ -14,9 +14,9 @@ namespace :notifications do
         msg: msgstock.text
       )
 
-      schedule.update_attributes(
-        next_send: DateUtils.new.rand_time
-      )
+      # schedule.update_attributes(
+      #   next_send: DateUtils.new.rand_time
+      # )
     end
   end
 end

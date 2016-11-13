@@ -5,7 +5,6 @@ class FbPostMessage
 
   def process!(recipient: nil, msg: nil)
     rq    = build_request(recipient, msg)
-    puts rq.to_hash.inspect
     http  = http_cnx.request(rq)
     http.code
   end
@@ -18,10 +17,10 @@ class FbPostMessage
 
   def http_cnx
     uri = base_url
-    Net::HTTP.new(uri.host, uri.port, :use_ssl => uri.scheme == 'https')
-    # http.use_ssl = true
-    # http.verify_mode = OpenSSL::SSL::VERIFY_PEER
-    # http
+    http = Net::HTTP.new(uri.host, uri.port)
+    http.use_ssl = true
+    http.verify_mode = OpenSSL::SSL::VERIFY_PEER
+    http
   end
 
   def build_request(recipient, msg)
